@@ -56,15 +56,24 @@ void strbuf_reset(struct strbuf *sb){
 }
 
 
-void strbuf_grow(struct strbuf *sb, size_t extra);//确保在 len 之后 strbuf 中至少有 extra 个字节的空闲空间可用
-
-void strbuf_add(struct strbuf *sb, const void *data, size_t len);//向 sb 追加长度为 len 的数据 data
-
-void strbuf_addch(struct strbuf *sb, int c);//向 sb 追加一个字符 c
-
+void strbuf_grow(struct strbuf *sb, size_t extra){//确保在 len 之后 strbuf 中至少有 extra 个字节的空闲空间可用
+    if(sb->len+extra+1>=sb->alloc)sb->buf=realloc(sb->buf,sb->len+extra+1);
+}
+void strbuf_add(struct strbuf *sb, const void *data, size_t len){//向 sb 追加长度为 len 的数据 data
+    strbuf_addstr(sb,(char*)data);
+}
+void strbuf_addch(struct strbuf *sb, int c){//向 sb 追加一个字符 c
+    if(sb->alloc>=sb->len+2){
+        strcpy(sb->buf+sb->len+1,(char)c);
+    }
+    else {
+        strbuf_grow(sb,1);
+        strcpy(sb->buf+sb->len+1,(char)c);
+    }
+}
 void strbuf_addstr(struct strbuf *sb,const char *s){//向 sb 追加一个字符串 s
     if(strlen(s)+sb->len<sb->alloc){//如果缓冲区的容量足够容纳追加字符
-        strcpy(sb->buf+sb->len,s);//追加字符串
+        strcpy(sb->buf+sb->len+1,s);//追加字符串
         sb->len=strlen(sb->buf);//长度
     }
 
