@@ -42,7 +42,7 @@ size_t strbuf_avail(const struct strbuf *sb);//计算 sb 目前仍可以向后�
 void strbuf_insert(struct strbuf *sb, size_t pos, const void *data, size_t len);//向 sb 内存坐标为 pos 位置插入长度为 len 的数据 data
 
 /* 2c */ 
-/* void strbuf_ltrim(struct strbuf *sb);//去除 sb 缓冲区左端的所有 空格，tab, '\t'
+void strbuf_ltrim(struct strbuf *sb);//去除 sb 缓冲区左端的所有 空格，tab, '\t'
 
 void strbuf_rtrim(struct strbuf *sb);//去除 sb 缓冲区右端的所有 空格，tab, '\t'
 
@@ -51,7 +51,7 @@ void strbuf_remove(struct strbuf *sb, size_t pos, size_t len);//删除 sb 缓冲
 ssize_t strbuf_read(struct strbuf *sb, int fd, size_t hint);//sb 增长 hint ? hint : 8192 大小， 然后将文件描述符为 fd 的所有文件内容追加到 sb 中
 
 int strbuf_getline(struct strbuf *sb, FILE *fp);//将 将文件句柄为 fp 的一行内容（抛弃换行符）读取到 sb
- */
+
 /*challenge 1*/
 /* struct strbuf **strbuf_split_buf(const char *str, size_t len, int terminator, int max);/*将长度为 len 的字符串 str 根据切割字符
  terminator 切成多个 strbuf,并从结果返回，max 可 以用来限定最大切割数量。返回 struct strbuf 的指针数组，数组的最后元素为 NULL*/
@@ -63,4 +63,4 @@ strlen : target_str 长度 ，前缀相同返回 true 失败返回 false*/
 /*challenge 3*/
 /* char* strbuf_get_mid_buf(char* target_buf, int begin, int end, int len); *//*target_str : 目标字符串，begin : 开始下标，
 end 结束下标。len : target_buf的长度，参数不合法返回 NULL. 下标从0开始，[begin, end)区间*/
-#include "strbuf.c"
+#include "WangChen.c"
